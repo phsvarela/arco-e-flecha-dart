@@ -230,10 +230,10 @@ class Target extends PositionComponent with CollisionCallbacks {
 
   void moveWithArrows() {
     final world = (parent as ArcheryWorld);
-    position.x = position.x - 25 * world.arrowCount;
+    position.x = position.x + 25 * world.arrowCount;
 
     for (var arrow in attachedArrows) {
-      arrow.position.x = arrow.position.x - 25 * world.arrowCount;
+      arrow.position.x = arrow.position.x + 25 * world.arrowCount;
     }
   }
 }

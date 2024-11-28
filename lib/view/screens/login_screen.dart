@@ -8,8 +8,8 @@ import '../../blocs/navigation_bloc.dart';
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  String usuario = "";
-  String senha = "";
+  String? email;
+  String? senha;
 
   @override
   Widget build(BuildContext context) {
@@ -40,14 +40,22 @@ class LoginScreen extends StatelessWidget {
                         children: [
                           TextFormField(
                             decoration:
-                                const InputDecoration(label: Text("Usuário")),
+                                const InputDecoration(label: Text("Email")),
                             onSaved: (String? newValue) {
-                              usuario = newValue ?? "";
+                              email = newValue ?? "";
                             },
                             validator: (String? value) {
-                              if (value == null) {
-                                return "Erro";
+                              if (value == null || value == '') {
+                                return "Insira seu email";
                               }
+
+                              final emailRegex =
+                                  RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+                              if (!emailRegex.hasMatch(value)) {
+                                return 'Insira um email válido';
+                              }
+
+                              return null;
                             },
                           ),
                         ]),
@@ -68,8 +76,10 @@ class LoginScreen extends StatelessWidget {
                             },
                             validator: (String? value) {
                               if (value == null) {
-                                return "Erro";
+                                return "Insira sua senha";
                               }
+
+                              return null;
                             },
                           ),
                         ]),
@@ -85,7 +95,7 @@ class LoginScreen extends StatelessWidget {
                           if (_formKey.currentState!.validate()) {
                             _formKey.currentState!.save();
                             BlocProvider.of<AuthBloc>(context)
-                                .add(LoginUser(usuario: usuario, senha: senha));
+                                .add(LoginUser(email: email!, senha: senha!));
                           }
                         },
                         children: const [

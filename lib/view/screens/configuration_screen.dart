@@ -38,45 +38,47 @@ class _ConfigurationScreenState extends State<ConfigurationScreen> {
               children: [
                 Column(
                   children: [
-                    SwitchListTile(
-                      title: const Text("Som"),
-                      value: isSoundOn,
-                      onChanged: (bool value) {
-                        setState(() {
-                          isSoundOn = value;
-                        });
-                      },
-                    ),
-                    const SizedBox(height: 20),
-                    SwitchListTile(
-                      title: const Text("Vento"),
-                      value: isWindOn,
-                      onChanged: (bool value) {
-                        setState(() {
-                          isWindOn = value;
-                        });
-                      },
-                    ),
+                    // SwitchListTile(
+                    //   title: const Text("Som"),
+                    //   value: isSoundOn,
+                    //   onChanged: (bool value) {
+                    //     setState(() {
+                    //       isSoundOn = value;
+                    //     });
+                    //   },
+                    // ),
+                    // const SizedBox(height: 20),
+                    // SwitchListTile(
+                    //   title: const Text("Vento"),
+                    //   value: isWindOn,
+                    //   onChanged: (bool value) {
+                    //     setState(() {
+                    //       isWindOn = value;
+                    //     });
+                    //   },
+                    // ),
                     const SizedBox(height: 70),
-                    CustomSquare(
-                      padding: 20,
-                      width: 200,
-                      height: 70,
-                      borderRadius: 20,
-                      onTap: () {
-                        BlocProvider.of<NavigationBloc>(context)
-                            .add(GoToProfile());
-                      },
-                      children: const [
-                        Center(
-                          child: Text(
-                            "Sua conta",
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.w400),
+                    Center(
+                      child: CustomSquare(
+                        padding: 20,
+                        width: 200,
+                        height: 70,
+                        borderRadius: 20,
+                        onTap: () {
+                          BlocProvider.of<NavigationBloc>(context)
+                              .add(GoToProfile());
+                        },
+                        children: const [
+                          Center(
+                            child: Text(
+                              "Sua conta",
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.w400),
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
+                        ],
+                      ),
+                    )
                   ],
                 ),
               ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:projeto_final/model/player.dart';
 import 'package:projeto_final/view/screens/configuration_screen.dart';
 import 'package:projeto_final/view/screens/game_screen.dart';
 import 'package:projeto_final/view/screens/info_screen.dart';
@@ -34,6 +35,20 @@ class Wrapper extends StatelessWidget {
                     );
                   },
                 );
+              } else if (state is AuthSuccess) {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    Future.delayed(const Duration(seconds: 1), () {
+                      Navigator.of(context).pop();
+                    });
+
+                    return AlertDialog(
+                      title: const Text("Sucesso na requisição"),
+                      content: Text(state.successMessage),
+                    );
+                  },
+                );
               } else if (state is Authenticated) {
                 BlocProvider.of<NavigationBloc>(context).add(GoToMainMenu());
               } else if (state is Unauthenticated) {
@@ -60,7 +75,7 @@ class Wrapper extends StatelessWidget {
                   case InfoScreenState():
                     return const InfoScreen();
                   case GameScreenState():
-                    return GameScreen();
+                    return const GameScreen();
                   default:
                     return const InitialScreen();
                 }

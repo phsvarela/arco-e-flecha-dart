@@ -9,9 +9,9 @@ import '../../widgets/header.dart';
 class RegisterScreen extends StatelessWidget {
   RegisterScreen({super.key});
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  late String email;
-  late String username;
-  late String password;
+  String? email;
+  String? username;
+  String? password;
 
   @override
   Widget build(BuildContext context) {
@@ -37,10 +37,7 @@ class RegisterScreen extends StatelessWidget {
                 children: [
                   TextFormField(
                     decoration:
-                        const InputDecoration(label: Text("Digite seu e-mail")),
-                    onSaved: (value) {
-                      email = value ?? '';
-                    },
+                        const InputDecoration(label: Text("Digite seu e-mail")),                 
                     validator: (value) {
                       if (value == null || value == '') {
                         return 'Email é obrigatório';
@@ -51,6 +48,8 @@ class RegisterScreen extends StatelessWidget {
                       if (!emailRegex.hasMatch(value)) {
                         return 'Insira um email válido';
                       }
+
+                      email = value;
 
                       return null;
                     },
@@ -119,10 +118,7 @@ class RegisterScreen extends StatelessWidget {
                 children: [
                   TextFormField(
                     decoration:
-                        const InputDecoration(label: Text("Digite sua senha")),
-                    onSaved: (value) {
-                      password = value ?? '';
-                    },
+                        const InputDecoration(label: Text("Digite sua senha")),                    
                     validator: (value) {
                       if (value == null || value == '') {
                         return 'Senha é obrigatório';
@@ -131,6 +127,8 @@ class RegisterScreen extends StatelessWidget {
                       if (value.length < 6) {
                         return 'Senha curta demais';
                       }
+
+                      password = value;
 
                       return null;
                     },
@@ -159,6 +157,8 @@ class RegisterScreen extends StatelessWidget {
                       if (value != password) {
                         return 'As senhas não são iguais';
                       }
+
+                      return null;
                     },
                   ),
                 ],
@@ -170,13 +170,11 @@ class RegisterScreen extends StatelessWidget {
                 height: 70,
                 borderRadius: 20,
                 onTap: () {
-                  showDialog(
-                    context: context,
-                    builder: (context) {
-                      BlocProvider.of<AuthBloc>(context).add(RegisterUser(
-                          email: email, usuario: username, senha: password));
-                    },
-                  );
+                  if (_formKey.currentState!.validate()) {
+                    _formKey.currentState!.save();
+                    BlocProvider.of<AuthBloc>(context).add(RegisterUser(
+                        email: email!, usuario: username!, senha: password!));
+                  }
                 },
                 children: const [
                   Center(

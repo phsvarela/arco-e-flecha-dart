@@ -6,7 +6,7 @@ import 'package:projeto_final/widgets/custom_square.dart';
 
 class GameOverMenu extends StatelessWidget {
   final ArcheryGame game;
-  final double score;
+  final int score;
   const GameOverMenu({super.key, required this.game, required this.score});
 
   @override
@@ -50,6 +50,8 @@ class GameOverMenu extends StatelessWidget {
                                     height: 70,
                                     borderRadius: 20,
                                     onTap: () {
+                                      BlocProvider.of<NavigationBloc>(context)
+                                          .add(HandleGameOver(score: score));
                                       game.overlays.remove('GameOverMenu');
                                       game.reset();
                                     },
@@ -65,6 +67,8 @@ class GameOverMenu extends StatelessWidget {
                                       height: 70,
                                       borderRadius: 20,
                                       onTap: () {
+                                        BlocProvider.of<NavigationBloc>(context)
+                                            .add(HandleGameOver(score: score));
                                         game.overlays.remove('GameOverMenu');
                                         BlocProvider.of<NavigationBloc>(context)
                                             .add(GoToMainMenu());

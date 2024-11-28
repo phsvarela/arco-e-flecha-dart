@@ -15,7 +15,7 @@ class GameScreen extends StatelessWidget {
         overlayBuilderMap: {
           'PauseMenu': (context, ArcheryGame game) => PauseMenu(game: game),
           'GameOverMenu': (context, ArcheryGame game) =>
-              GameOverMenu(game: game, score: game.finalScore)
+              GameOverMenu(game: game, score: (game.finalScore).toInt())
         },
       ),
     );

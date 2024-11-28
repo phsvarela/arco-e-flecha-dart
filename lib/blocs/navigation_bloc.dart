@@ -1,7 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:projeto_final/blocs/auth_bloc.dart';
+import 'package:projeto_final/provider/firestore_provider.dart';
 
 class NavigationBloc extends Bloc<NavigationEvent, NavigationState> {
-  NavigationBloc() : super(InitialScreenState()){
+  NavigationBloc() : super(InitialScreenState()) {
     on<GoToLogin>((event, emit) => emit(LoginScreenState()));
 
     on<GoToMainMenu>((event, emit) => emit(MainMenuScreenState()));
@@ -19,12 +21,21 @@ class NavigationBloc extends Bloc<NavigationEvent, NavigationState> {
     on<GoToInfo>((event, emit) => emit(InfoScreenState()));
 
     on<GoToGameScreen>((event, emit) => emit(GameScreenState()));
+
+    on<HandleGameOver>((event, emit) async {
+      await FirestoreDatabase.helper.updatePlayerScore(event.score);
+    });
   }
 }
 
 abstract class NavigationEvent {}
 
 class GoToLogin extends NavigationEvent {}
+
+class HandleGameOver extends NavigationEvent {
+  final int score;
+  HandleGameOver({required this.score});
+}
 
 class GoToMainMenu extends NavigationEvent {}
 
@@ -41,7 +52,6 @@ class GoToConfiguration extends NavigationEvent {}
 class GoToInfo extends NavigationEvent {}
 
 class GoToGameScreen extends NavigationEvent {}
-
 
 abstract class NavigationState {}
 
@@ -61,4 +71,4 @@ class ConfigurationScreenState extends NavigationState {}
 
 class InfoScreenState extends NavigationState {}
 
-class GameScreenState extends NavigationState{}
+class GameScreenState extends NavigationState {}
