@@ -9,15 +9,7 @@ import 'view/wrapper.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   if (kIsWeb) {
-    await Firebase.initializeApp(
-        options: const FirebaseOptions(
-            apiKey: "AIzaSyBHfaXyHzOmNc3L_j841AFpiwwVdXo3szA",
-            authDomain: "si700-260871.firebaseapp.com",
-            databaseURL: "https://si700-260871-default-rtdb.firebaseio.com",
-            projectId: "si700-260871",
-            storageBucket: "si700-260871.firebasestorage.app",
-            messagingSenderId: "506780627659",
-            appId: "1:506780627659:web:6560b1d7b652650e2aa14e"));
+    await Firebase.initializeApp();
   } else {
     await Firebase.initializeApp();
   }

@@ -58,36 +58,36 @@ class InitialScreen extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 30),
-          CustomSquare(
-            padding: 20,
-            width: 100,
-            height: 70,
-            borderRadius: 20,
-            onTap: () {
-              showDialog(
-                context: context,
-                builder: (context) {
-                  return const AlertDialog(
-                    title: Text(
-                      "Erro de serviço",
-                      style: TextStyle(color: Color(ColorsConstants.text)),
-                    ),
-                    content: Text("Serviço em construção"),
-                  );
-                },
-              );
-            },
-            children: [
-              Align(
-                alignment: Alignment.center,
-                child: Image.asset(
-                  'images/google_logo.png',
-                  width: 26,
-                  height: 26,
-                ),
-              ),
-            ],
-          ),
+          // CustomSquare(
+          //   padding: 20,
+          //   width: 100,
+          //   height: 70,
+          //   borderRadius: 20,
+          //   onTap: () {
+          //     showDialog(
+          //       context: context,
+          //       builder: (context) {
+          //         return const AlertDialog(
+          //           title: Text(
+          //             "Erro de serviço",
+          //             style: TextStyle(color: Color(ColorsConstants.text)),
+          //           ),
+          //           content: Text("Serviço em construção"),
+          //         );
+          //       },
+          //     );
+          //   },
+          //   children: [
+          //     Align(
+          //       alignment: Alignment.center,
+          //       child: Image.asset(
+          //         'images/google_logo.png',
+          //         width: 26,
+          //         height: 26,
+          //       ),
+          //     ),
+          //   ],
+          // ),
         ],
       ),
     );
